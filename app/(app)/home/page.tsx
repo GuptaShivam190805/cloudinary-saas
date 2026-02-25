@@ -10,6 +10,7 @@ function Home() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  console.log(videos);
 
   const fetchVideos = useCallback(async () => {
     try {
