@@ -9,8 +9,6 @@ import { toast } from "react-toastify";
 function Home() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  console.log(videos);
 
   const fetchVideos = useCallback(async () => {
     try {
@@ -21,9 +19,10 @@ function Home() {
       } else {
         throw new Error("Unexpected response format");
       }
-    } catch (error: any) {
-      toast.error(error.message || "Server Error");
-      setError("Failed to fetch videos");
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Server Error";
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -36,13 +35,15 @@ function Home() {
   const handleDownload = useCallback((url: string, title: string) => {
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", `${title}.mp4`);
+    link.download = `${title}.mp4`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return <div className="p-4">Loading videos...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -67,4 +68,4 @@ function Home() {
   );
 }
 
-export default Home;  
+export default Home;

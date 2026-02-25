@@ -70,8 +70,8 @@ export async function POST(request: NextRequest) {
                 title,
                 description,
                 publicId: result.public_id,
-                originalSize: originalSize,
-                compressedSize: String(result.bytes),
+                originalSize: Number(originalSize),
+                compressedSize: Number(result.bytes),
                 duration: result.duration || 0
             }
         })
