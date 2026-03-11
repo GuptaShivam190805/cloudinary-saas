@@ -15,10 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cloudinary Saas",
+  title: "Cloudinary SaaS",
   icons: {
-    icon: "/logo.png"
-  }
+    icon: "/logo.png",        
+    shortcut: "/logo.png",    
+    apple: "/logo.png",       
+  },
 };
 
 export default function RootLayout({
